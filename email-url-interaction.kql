@@ -1,0 +1,14 @@
+//################################################################
+//##  PLATFORM: Microsoft Exchange Online (Email Security Gateway)
+//##  AUTHOR: IGOR OLIVEIRA (#IO)
+//##  LOCATION: Microsoft Sentinel | Logs
+//##  TITLE: KQL to detect URL click over email message
+//################################################################
+let URL_Click_Lookup = 
+UrlClickEvents
+| where TimeGenerated > ago(90d)
+| where AccountUpn == "username@domain.tld"
+| where SenderEmailAddress contains "domain.tld"
+| join kind=leftouter EmailEvents on NetworkMessageId
+| project TimeGenerated, SenderFromAddress, Subject, AccountUpn, Url, ActionType, Workload, DeliveryAction;
+URL_Click_Lookup
