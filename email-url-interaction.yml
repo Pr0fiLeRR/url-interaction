@@ -1,0 +1,35 @@
+---
+title: Email URL Interaction
+author: Igor Oliveira (Pr0fiLeRR)
+id: 743f6019-b73a-4147-8b14-1aeb89d37522
+references:
+  - https://detections.ai/rules/019be674-caf7-744e-b252-5feadfb090f8
+  - https://sigmahq.io/sigma-specification/specification/sigma-rules-specification.html
+description: >
+  This simple script detects whether a user clicked on a URL in an email message.
+  It uses the 'UrlClickEvents' table in Sentinel to identify such interactions,
+  as well as the 'EmailEvents' table to correlate the email message with the URL click event.
+status: stable
+tags:
+  - attack.t1566.002
+date: 2026-02-23
+logsource:
+  product: windows
+  category: email
+detection:
+  selection:
+    accountusername: 'username@domain.tld' # This is the recipient's email address on your environment
+    senderemailaddress|contains|any: 'domain/tld' # This is the sender's domain of the potential attacker
+condition: selection
+fields:
+  - accountusername
+  - senderemailaddress
+  - url
+  - actiontype
+falsepositives:
+  - Legitimate email interactions where users click on URLs from trusted senders.
+  - Marketing emails or newsletters that contain links and are frequently clicked by users.
+  - Internal communications within an organization that include URLs, such as company announcements or updates.
+  - Phishing simulations conducted by security teams to test user awareness and response to potential threats.
+level: medium
+...
