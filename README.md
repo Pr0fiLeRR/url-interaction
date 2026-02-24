@@ -19,4 +19,5 @@
 
 <p>This simple query helps detect whether a user interacted with the URL within the email message or not.</p>
 
-- [Link to this contribution](https://detections.ai/rules/019be674-caf7-744e-b252-5feadfb090f8)
+- [Link to the KQL contribution](https://detections.ai/rules/019be674-caf7-744e-b252-5feadfb090f8)
+- [Link to the Sigma contribution](https://detections.ai/rules/019c8e79-cd3f-776f-a54d-db4c20cac009)
